@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Canvas
+  - Interjection
+  - Noum
+  - Adjective
+  - Adverb
+  - Article
+  - Pronoum
+  - Numeral
+  - Verb
   layers:
   - Default
   - TransparentFX
