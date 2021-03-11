@@ -39,7 +39,8 @@ public class Word : MonoBehaviour
 
     private void Start()
     {
-        randomClass = Random.Range(1, 9);
+        //randomClass = Random.Range(1, 9);
+        randomClass = 1;
         ClassSelect();
 
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
