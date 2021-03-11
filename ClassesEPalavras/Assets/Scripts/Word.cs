@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 public class Word : MonoBehaviour
 {
@@ -16,25 +15,24 @@ public class Word : MonoBehaviour
     public bool isInterjection;
     public bool isPreposition;
 
-    private TMP_Text text; 
     [SerializeField]
-    private string[] nouns;
+    private TextAsset nouns;
     [SerializeField]
-    private string[] adjectives;
+    private TextAsset adjectives;
     [SerializeField]
-    private string[] adverbs;
+    private TextAsset adverbs;
     [SerializeField]
-    private string[] articles;
+    private TextAsset articles;
     [SerializeField]
-    private string[] pronouns;
+    private TextAsset pronouns;
     [SerializeField]
-    private string[] numerals;
+    private TextAsset numerals;
     [SerializeField]
-    private string[] verbs;
+    private TextAsset verbs;
     [SerializeField]
-    private string[] interjections;
+    private TextAsset interjections;
     [SerializeField]
-    private string[] prepositions;
+    private TextAsset prepositions;
 
     private int randomClass;
     private string randomWord;
@@ -45,7 +43,7 @@ public class Word : MonoBehaviour
         ClassSelect();
 
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
-       
+
     }
 
     private void ClassSelect()
@@ -87,43 +85,42 @@ public class Word : MonoBehaviour
     {
         if (randomClass == 1)
         {
-            randomWord = nouns[Random.Range(0, nouns.Length)];
+            randomWord = WordGetter.TextToList(nouns)[Random.Range(0, WordGetter.TextToList(nouns).Count)];
         } 
         else if (randomClass == 2)
         {
-            randomWord = adjectives[Random.Range(0, adjectives.Length)];
+            randomWord = WordGetter.TextToList(adjectives)[Random.Range(0, WordGetter.TextToList(adjectives).Count)];
         }
         else if (randomClass == 3)
         {
-            randomWord = adverbs[Random.Range(0, adverbs.Length)];
+            randomWord = WordGetter.TextToList(adverbs)[Random.Range(0, WordGetter.TextToList(adverbs).Count)];
         }
         else if (randomClass == 4)
         {
-            randomWord = articles[Random.Range(0, articles.Length)];
+            randomWord = WordGetter.TextToList(articles)[Random.Range(0, WordGetter.TextToList(articles).Count)];
         }
         else if (randomClass == 5)
         {
-            randomWord = pronouns[Random.Range(0, pronouns.Length)];
+            randomWord = WordGetter.TextToList(pronouns)[Random.Range(0, WordGetter.TextToList(pronouns).Count)];
         }
         else if (randomClass == 6)
         {
-            randomWord = numerals[Random.Range(0, numerals.Length)];
+            randomWord = WordGetter.TextToList(numerals)[Random.Range(0, WordGetter.TextToList(numerals).Count)];
         }
         else if (randomClass == 7)
         {
-            randomWord = verbs[Random.Range(0, verbs.Length)];
+            randomWord = WordGetter.TextToList(verbs)[Random.Range(0, WordGetter.TextToList(verbs).Count)];
         }
         else if (randomClass == 8)
         {
-            randomWord = prepositions[Random.Range(0, prepositions.Length)];
+            randomWord = WordGetter.TextToList(prepositions)[Random.Range(0, WordGetter.TextToList(prepositions).Count)];
         }
         else if (randomClass == 9)
         {
-            randomWord = interjections[Random.Range(0, interjections.Length)];
+            randomWord = WordGetter.TextToList(interjections)[Random.Range(0, WordGetter.TextToList(interjections).Count)];
         }
 
         return randomWord;
     }
 
-    
 }

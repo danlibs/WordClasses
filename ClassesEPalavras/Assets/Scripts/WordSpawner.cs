@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class WordSpawner : MonoBehaviour
 {
+
     [SerializeField]
     private GameObject word;
-    private Vector3 position;
     private Canvas canvas;
-
-    private void Awake()
-    {
-        position = transform.position;
-    }
 
     private void Start()
     {

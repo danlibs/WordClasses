@@ -155,63 +155,15 @@ MonoBehaviour:
   isVerb: 0
   isInterjection: 0
   isPreposition: 0
-  nouns:
-  - carro
-  - cadeira
-  - molho
-  adjectives:
-  - bonito
-  - estranho
-  - lega
-  adverbs:
-  - hoje
-  - cedo
-  - muito
-  articles:
-  - o
-  - a
-  - um
-  - uma
-  - os
-  - as
-  - uns
-  - umas
-  pronouns:
-  - eu
-  - tu
-  - ele
-  - ela
-  - "n\xF3s"
-  - "v\xF3s"
-  - eles
-  - elas
-  - meu
-  - minha
-  numerals:
-  - um
-  - primeiro
-  - dobro
-  - "tr\xEAs quartos"
-  - "vig\xE9simo"
-  verbs:
-  - andar
-  - sair
-  - brincar
-  interjections:
-  - Ai!
-  - Ei!
-  - Socorro!
-  prepositions:
-  - de
-  - por
-  - em
-  - para
-  - no
-  - na
-  - sob
-  - sobre
-  - contra
-  - pelo
+  nouns: {fileID: 4900000, guid: e7b1dc7e83c83db4ba2fed55b4f23726, type: 3}
+  adjectives: {fileID: 4900000, guid: ee9910d12e3e4b64ab5bd5ee160fe5b1, type: 3}
+  adverbs: {fileID: 4900000, guid: f3a31b434c71c674cbdef56c7ec21dc0, type: 3}
+  articles: {fileID: 4900000, guid: 728a283ed905c164a9edfa720d868182, type: 3}
+  pronouns: {fileID: 4900000, guid: 2e701867b97053c4f9d550399bdd1325, type: 3}
+  numerals: {fileID: 4900000, guid: 70b69e26bc9630143ba7958bd3a8b1ad, type: 3}
+  verbs: {fileID: 4900000, guid: e35b8539c8194b84aaa52e604bc831fd, type: 3}
+  interjections: {fileID: 4900000, guid: b787a4dd928956947baf44bc73ca8da2, type: 3}
+  prepositions: {fileID: 4900000, guid: 1c0b762ee3cfbdb40a351160f7ccabd3, type: 3}
 --- !u!1 &3029959253959592175
 GameObject:
   m_ObjectHideFlags: 0

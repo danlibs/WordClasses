@@ -1,0 +1,4 @@
+correr
+morar
+andar
+viver
