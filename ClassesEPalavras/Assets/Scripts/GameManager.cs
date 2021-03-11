@@ -12,7 +12,7 @@ public class GameManager: MonoBehaviour
     [SerializeField]
     private TMP_Text timeText;
 
-    private float timeRemaining = 30;
+    public float timeRemaining = 30;
     private bool timerIsRunning;
 
     private void Start()

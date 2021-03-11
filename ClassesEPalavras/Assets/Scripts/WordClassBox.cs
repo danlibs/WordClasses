@@ -21,11 +21,139 @@ public class WordClassBox : MonoBehaviour, IDropHandler
         {
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = rectTransform.anchoredPosition;
             wordPlaced = eventData.pointerDrag.GetComponentInChildren<Word>();
-            
-            if (tag == "Noum" && wordPlaced.isNoum)
+
+            CheckWordAndClass();
+        }
+    }
+
+    private void CheckWordAndClass()
+    {
+        if (wordPlaced != null)
+        {
+            //Verify nouns
+            if (tag == "Noum")
             {
-                gameManager.points += 2;
-                gameManager.UpdatePoints();
+                if (wordPlaced.isNoum)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify adjectives
+            if (tag == "Adjective")
+            {
+                if (wordPlaced.isAdjective)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify adverbs
+            if (tag == "Adverb")
+            {
+                if (wordPlaced.isAdverb)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify articles
+            if (tag == "Article")
+            {
+                if (wordPlaced.isArticle)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify numerals
+            if (tag == "Numeral")
+            {
+                if (wordPlaced.isNumeral)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify pronouns
+            if (tag == "Pronoum")
+            {
+                if (wordPlaced.isPronoum)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify preposition
+            if (tag == "Preposition")
+            {
+                if (wordPlaced.isPreposition)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify interjections
+            if (tag == "Interjection")
+            {
+                if (wordPlaced.isInterjection)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
+            }
+
+            //Verify verbs
+            if (tag == "Verb")
+            {
+                if (wordPlaced.isVerb)
+                {
+                    gameManager.points += 2;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                }
             }
         }
         
