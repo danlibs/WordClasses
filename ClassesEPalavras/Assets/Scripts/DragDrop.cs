@@ -5,9 +5,11 @@ using UnityEngine.EventSystems;
 
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    public bool isPositioned = false;
+
     [SerializeField]
     private Canvas canvas;
-
+    private Vector2 initialPosition;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
@@ -15,11 +17,22 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         rectTransform = GetComponent<RectTransform>();
         canvasGroup = GetComponent<CanvasGroup>();
+        initialPosition = transform.position;
     }
 
     private void Start()
     {
         canvas = GameObject.FindObjectOfType<Canvas>();
+    }
+
+    private void Update()
+    {
+        if (isPositioned)
+        {
+            transform.position = initialPosition;
+            GetComponentInChildren<Word>().UpdateWord();
+            isPositioned = false;
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)

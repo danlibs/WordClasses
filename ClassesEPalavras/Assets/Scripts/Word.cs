@@ -14,6 +14,7 @@ public class Word : MonoBehaviour
     public bool isVerb;
     public bool isInterjection;
     public bool isPreposition;
+    public int randomClass;
 
     [SerializeField]
     private TextAsset nouns;
@@ -34,7 +35,6 @@ public class Word : MonoBehaviour
     [SerializeField]
     private TextAsset prepositions;
 
-    private int randomClass;
     private string randomWord;
 
     private void Start()
@@ -42,12 +42,10 @@ public class Word : MonoBehaviour
         randomClass = Random.Range(1, 9);
         //randomClass = 1;
         ClassSelect();
-
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
-
     }
 
-    private void ClassSelect()
+    public void ClassSelect()
     {
         switch (randomClass)
         {
@@ -82,7 +80,7 @@ public class Word : MonoBehaviour
         }
     }
 
-    private string WordSelect(int randomClass)
+    public string WordSelect(int randomClass)
     {
         if (randomClass == 1)
         {
@@ -122,6 +120,13 @@ public class Word : MonoBehaviour
         }
 
         return randomWord;
+    }
+
+    public void UpdateWord()
+    {
+        randomClass = Random.Range(1, 9);
+        ClassSelect();
+        GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
     }
 
 }

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WordSpawner : MonoBehaviour
 {
-
     [SerializeField]
     private GameObject word;
     private Canvas canvas;

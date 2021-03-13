@@ -23,6 +23,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             wordPlaced = eventData.pointerDrag.GetComponentInChildren<Word>();
 
             CheckWordAndClass();
+            wordPlaced.GetComponentInParent<DragDrop>().isPositioned = true;
         }
     }
 
@@ -36,6 +37,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isNoum)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -50,6 +52,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isAdjective)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -64,6 +67,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isAdverb)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -78,6 +82,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isArticle)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -92,6 +97,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isNumeral)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -106,6 +112,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isPronoum)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -120,6 +127,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isPreposition)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -134,6 +142,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isInterjection)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
@@ -148,6 +157,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
                 if (wordPlaced.isVerb)
                 {
                     gameManager.points += 2;
+                    gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
