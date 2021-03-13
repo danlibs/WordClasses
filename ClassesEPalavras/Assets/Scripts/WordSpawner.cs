@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WordSpawner : MonoBehaviour
 {
+    public bool isActive;
+
     [SerializeField]
     private GameObject word;
     private Canvas canvas;
@@ -14,7 +16,7 @@ public class WordSpawner : MonoBehaviour
         SpawnWord();
     }
 
-    private void SpawnWord()
+    public void SpawnWord()
     {
         Instantiate(word, transform.position, Quaternion.identity, canvas.transform);
     }

@@ -34,7 +34,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify nouns
             if (tag == "Noum")
             {
-                if (wordPlaced.isNoum)
+                if (wordPlaced.classes["noum"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -49,7 +49,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify adjectives
             if (tag == "Adjective")
             {
-                if (wordPlaced.isAdjective)
+                if (wordPlaced.classes["adjective"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -64,7 +64,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify adverbs
             if (tag == "Adverb")
             {
-                if (wordPlaced.isAdverb)
+                if (wordPlaced.classes["adverb"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -79,7 +79,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify articles
             if (tag == "Article")
             {
-                if (wordPlaced.isArticle)
+                if (wordPlaced.classes["article"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -94,7 +94,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify numerals
             if (tag == "Numeral")
             {
-                if (wordPlaced.isNumeral)
+                if (wordPlaced.classes["numeral"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -109,7 +109,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify pronouns
             if (tag == "Pronoum")
             {
-                if (wordPlaced.isPronoum)
+                if (wordPlaced.classes["pronoum"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -124,7 +124,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify preposition
             if (tag == "Preposition")
             {
-                if (wordPlaced.isPreposition)
+                if (wordPlaced.classes["preposition"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -139,7 +139,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify interjections
             if (tag == "Interjection")
             {
-                if (wordPlaced.isInterjection)
+                if (wordPlaced.classes["interjection"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;
@@ -154,7 +154,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler
             //Verify verbs
             if (tag == "Verb")
             {
-                if (wordPlaced.isVerb)
+                if (wordPlaced.classes["verb"])
                 {
                     gameManager.points += 2;
                     gameManager.timeRemaining += 1;

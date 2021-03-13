@@ -5,15 +5,7 @@ using TMPro;
 
 public class Word : MonoBehaviour
 {
-    public bool isNoum;
-    public bool isAdjective;
-    public bool isAdverb;
-    public bool isArticle;
-    public bool isPronoum;
-    public bool isNumeral;
-    public bool isVerb;
-    public bool isInterjection;
-    public bool isPreposition;
+    public Dictionary<string, bool> classes;
     public int randomClass;
 
     [SerializeField]
@@ -39,8 +31,8 @@ public class Word : MonoBehaviour
 
     private void Start()
     {
-        randomClass = Random.Range(1, 9);
-        //randomClass = 1;
+        InitiateClasses();
+        randomClass = Random.Range(0, 8);
         ClassSelect();
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
     }
@@ -49,72 +41,71 @@ public class Word : MonoBehaviour
     {
         switch (randomClass)
         {
+            case 0:
+                classes["noum"] = true;
+                break;
             case 1:
-                isNoum = true;
+                classes["adjective"] = true;
                 break;
             case 2:
-                isAdjective = true;
+                classes["adverb"] = true;
                 break;
             case 3:
-                isAdverb = true;
+                classes["article"] = true;
                 break;
             case 4:
-                isArticle = true;
+                classes["pronoum"] = true;
                 break;
             case 5:
-                isPronoum = true;
+                classes["numeral"] = true;
                 break;
             case 6:
-                isNumeral = true;
+                classes["verb"] = true;
                 break;
             case 7:
-                isVerb = true;
+                classes["preposition"] = true;
                 break;
             case 8:
-                isPreposition = true;
-                break;
-            case 9:
-                isInterjection = true;
-                
+                classes["interjection"] = true;
                 break;
         }
     }
 
     public string WordSelect(int randomClass)
     {
-        if (randomClass == 1)
+        if (randomClass == 0)
         {
             randomWord = WordGetter.TextToList(nouns)[Random.Range(0, WordGetter.TextToList(nouns).Count)];
         } 
-        else if (randomClass == 2)
+        else if (randomClass == 1)
         {
             randomWord = WordGetter.TextToList(adjectives)[Random.Range(0, WordGetter.TextToList(adjectives).Count)];
         }
-        else if (randomClass == 3)
+        else if (randomClass == 2)
         {
             randomWord = WordGetter.TextToList(adverbs)[Random.Range(0, WordGetter.TextToList(adverbs).Count)];
         }
-        else if (randomClass == 4)
+        else if (randomClass == 3)
         {
             randomWord = WordGetter.TextToList(articles)[Random.Range(0, WordGetter.TextToList(articles).Count)];
         }
-        else if (randomClass == 5)
+        else if (randomClass == 4)
         {
             randomWord = WordGetter.TextToList(pronouns)[Random.Range(0, WordGetter.TextToList(pronouns).Count)];
         }
-        else if (randomClass == 6)
+        else if (randomClass == 5)
         {
             randomWord = WordGetter.TextToList(numerals)[Random.Range(0, WordGetter.TextToList(numerals).Count)];
         }
-        else if (randomClass == 7)
+        else if (randomClass == 6)
         {
             randomWord = WordGetter.TextToList(verbs)[Random.Range(0, WordGetter.TextToList(verbs).Count)];
         }
-        else if (randomClass == 8)
+        else if (randomClass == 7)
         {
             randomWord = WordGetter.TextToList(prepositions)[Random.Range(0, WordGetter.TextToList(prepositions).Count)];
         }
-        else if (randomClass == 9)
+        else if (randomClass == 8)
         {
             randomWord = WordGetter.TextToList(interjections)[Random.Range(0, WordGetter.TextToList(interjections).Count)];
         }
@@ -124,9 +115,38 @@ public class Word : MonoBehaviour
 
     public void UpdateWord()
     {
+        TurnAllValuesFalse();
         randomClass = Random.Range(1, 9);
         ClassSelect();
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
+    }
+
+    private void InitiateClasses()
+    {
+        classes = new Dictionary<string, bool> 
+        {
+            {"noum", false},
+            {"adjective", false},
+            {"adverb", false},
+            {"article", false},
+            {"numeral", false},
+            {"pronoum", false},
+            {"verb", false},
+            {"interjection", false},
+            {"preposition", false}
+        };
+    }
+
+    private Dictionary<string, bool> TurnAllValuesFalse()
+    {
+        string[] classKeys = new string[classes.Count];
+        classes.Keys.CopyTo(classKeys, 0);
+        
+        for (int i = 0; i < classes.Count; i++)
+        {
+            classes[classKeys[i]] = false;
+        }
+        return classes;
     }
 
 }
