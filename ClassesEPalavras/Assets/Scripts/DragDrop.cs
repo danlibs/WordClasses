@@ -6,12 +6,16 @@ using UnityEngine.EventSystems;
 public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     public bool isPositioned = false;
+    public bool isDragging;
 
     [SerializeField]
     private Canvas canvas;
     private Vector2 initialPosition;
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
+
+    private Color mouseOverColor = Color.yellow;
+    private Color baseColor = Color.white;
 
     private void Awake()
     {
@@ -37,6 +41,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        isDragging = true;
+        WordClassBox.draggedObject = eventData.pointerDrag.GetComponent<DragDrop>();
         canvasGroup.alpha = 0.6f;
         canvasGroup.blocksRaycasts = false;
     }
@@ -48,6 +54,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        WordClassBox.draggedObject = null;
+        isDragging = false;
         canvasGroup.alpha = 1f;
         canvasGroup.blocksRaycasts = true;
     }
@@ -56,4 +64,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     {
         
     }
+
+    
 }

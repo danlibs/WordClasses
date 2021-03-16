@@ -9,11 +9,28 @@ public class WordSpawner : MonoBehaviour
     [SerializeField]
     private GameObject word;
     private Canvas canvas;
+    [SerializeField]
+    private bool instatiated;
 
     private void Start()
     {
         canvas = GameObject.FindObjectOfType<Canvas>();
-        SpawnWord();
+    }
+
+    private void Update()
+    {
+        if (isActive)
+        {
+            if (!instatiated)
+            {
+                SpawnWord();
+                instatiated = true;
+            }
+        }
+        else
+        {
+            instatiated = false;
+        }
     }
 
     public void SpawnWord()

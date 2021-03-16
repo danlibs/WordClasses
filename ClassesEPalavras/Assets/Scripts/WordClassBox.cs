@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class WordClassBox : MonoBehaviour, IDropHandler
+public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
+    public static DragDrop draggedObject;
+
     [SerializeField]
     private GameDirector gameManager;
+
     private RectTransform rectTransform;
     private Word wordPlaced;
+    private Color mouseOverColor = Color.yellow;
+    private Color baseColor = Color.white;
 
     private void Awake()
     {
@@ -21,9 +27,11 @@ public class WordClassBox : MonoBehaviour, IDropHandler
         {
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = rectTransform.anchoredPosition;
             wordPlaced = eventData.pointerDrag.GetComponentInChildren<Word>();
+            draggedObject = wordPlaced.GetComponentInParent<DragDrop>();
 
             CheckWordAndClass();
             wordPlaced.GetComponentInParent<DragDrop>().isPositioned = true;
+            GetComponent<Image>().color = baseColor;
         }
     }
 
@@ -169,4 +177,19 @@ public class WordClassBox : MonoBehaviour, IDropHandler
         
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (draggedObject != null)
+        {
+            if (draggedObject.isDragging)
+            {
+                GetComponent<Image>().color = mouseOverColor;
+            }
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        GetComponent<Image>().color = baseColor;               
+    }
 }

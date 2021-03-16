@@ -15,10 +15,13 @@ public class GameDirector: MonoBehaviour
     private GameObject gameOverBox;
     [SerializeField]
     private GameObject[] spawners;
+    [SerializeField]
+    private GameObject pauseMenu;
 
     public float timeRemaining = 30;
     private bool timerIsRunning;
     private bool gameIsOver;
+    private GameObject[] boxesOnScene;
 
     private void Start()
     {
@@ -29,6 +32,7 @@ public class GameDirector: MonoBehaviour
     {
         if (!gameIsOver)
         {
+            EnableSpawners();
             if (timerIsRunning)
             {
                 if (timeRemaining >= 0)
@@ -45,7 +49,7 @@ public class GameDirector: MonoBehaviour
                     GameOver();
                 }
             }
-            EnableSpawners();
+
         }    
     }
 
@@ -58,25 +62,21 @@ public class GameDirector: MonoBehaviour
     {
         if (points >= 0 && !spawners[0].GetComponent<WordSpawner>().isActive)
         {
-            spawners[0].SetActive(true);
             spawners[0].GetComponent<WordSpawner>().isActive = true;
         }
 
         if (points >= 10 && !spawners[1].GetComponent<WordSpawner>().isActive)
         {
-            spawners[1].SetActive(true);
             spawners[1].GetComponent<WordSpawner>().isActive = true;
         }
 
         if (points >= 30 && !spawners[2].GetComponent<WordSpawner>().isActive)
         {
-            spawners[2].SetActive(true);
             spawners[2].GetComponent<WordSpawner>().isActive = true;
         }
 
         if (points >= 60 && !spawners[3].GetComponent<WordSpawner>().isActive)
         {
-            spawners[3].SetActive(true);
             spawners[3].GetComponent<WordSpawner>().isActive = true;
         }
     }
@@ -85,7 +85,6 @@ public class GameDirector: MonoBehaviour
     {
         foreach (GameObject spawner in spawners)
         {
-            spawner.SetActive(false);
             spawner.GetComponent<WordSpawner>().isActive = false;
         }
     }
@@ -106,10 +105,37 @@ public class GameDirector: MonoBehaviour
     {
         gameIsOver = false;
         gameOverBox.SetActive(false);
+        pauseMenu.SetActive(false);
+        DisableSpawners();
+        foreach (var word in boxesOnScene)
+        {
+            Destroy(word);
+        }
         timeRemaining = 30;
         timerIsRunning = true;
         points = 0;
         UpdatePoints();
-        spawners[0].GetComponent<WordSpawner>().SpawnWord();
+        //EnableSpawners();
+    }
+
+    public void PauseGame()
+    {
+        timerIsRunning = false;
+        boxesOnScene = GameObject.FindGameObjectsWithTag("Word");
+        foreach (var word in boxesOnScene)
+        {
+            word.SetActive(false);
+        }
+        pauseMenu.SetActive(true);
+    }
+
+    public void ContinueGame()
+    {
+        pauseMenu.SetActive(false);
+        foreach (var word in boxesOnScene)
+        {
+            word.SetActive(true);
+        }
+        timerIsRunning = true;
     }
 }

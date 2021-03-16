@@ -114,6 +114,10 @@ public class Word : MonoBehaviour
             {
                 classes["article"] = true;
             }
+            if (prepositionsList.Contains(randomWord))
+            {
+                classes["preposition"] = true;
+            }
         }
         else if (randomClass == 5)
         {
@@ -130,6 +134,10 @@ public class Word : MonoBehaviour
             {
                 classes["article"] = true;
             }
+            if (pronounsList.Contains(randomWord))
+            {
+                classes["pronoum"] = true;
+            }
         }
         else if (randomClass == 8)
         {
@@ -137,11 +145,6 @@ public class Word : MonoBehaviour
         }
 
         return randomWord;
-    }
-
-    public void CheckEqualWords()
-    {
-
     }
 
     public void UpdateWord()
