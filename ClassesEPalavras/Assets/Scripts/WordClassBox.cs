@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class WordClassBox : MonoBehaviour, IDropHandler
 {
     [SerializeField]
-    private GameManager gameManager;
+    private GameDirector gameManager;
     private RectTransform rectTransform;
     private Word wordPlaced;
 

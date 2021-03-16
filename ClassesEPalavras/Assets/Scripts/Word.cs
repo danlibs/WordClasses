@@ -16,8 +16,10 @@ public class Word : MonoBehaviour
     private TextAsset adverbs;
     [SerializeField]
     private TextAsset articles;
+    private List<string> articlesList;
     [SerializeField]
     private TextAsset pronouns;
+    private List<string> pronounsList;
     [SerializeField]
     private TextAsset numerals;
     [SerializeField]
@@ -26,8 +28,16 @@ public class Word : MonoBehaviour
     private TextAsset interjections;
     [SerializeField]
     private TextAsset prepositions;
+    private List<string> prepositionsList;
 
     private string randomWord;
+
+    private void Awake()
+    {
+        articlesList = WordGetter.TextToList(articles);
+        prepositionsList = WordGetter.TextToList(prepositions);
+        pronounsList = WordGetter.TextToList(pronouns);
+    }
 
     private void Start()
     {
@@ -88,10 +98,22 @@ public class Word : MonoBehaviour
         else if (randomClass == 3)
         {
             randomWord = WordGetter.TextToList(articles)[Random.Range(0, WordGetter.TextToList(articles).Count)];
+            if (prepositionsList.Contains(randomWord))
+            {
+                classes["preposition"] = true;
+            }
+            if (pronounsList.Contains(randomWord))
+            {
+                classes["pronoum"] = true;
+            }
         }
         else if (randomClass == 4)
         {
             randomWord = WordGetter.TextToList(pronouns)[Random.Range(0, WordGetter.TextToList(pronouns).Count)];
+            if (articlesList.Contains(randomWord))
+            {
+                classes["article"] = true;
+            }
         }
         else if (randomClass == 5)
         {
@@ -104,6 +126,10 @@ public class Word : MonoBehaviour
         else if (randomClass == 7)
         {
             randomWord = WordGetter.TextToList(prepositions)[Random.Range(0, WordGetter.TextToList(prepositions).Count)];
+            if (articlesList.Contains(randomWord))
+            {
+                classes["article"] = true;
+            }
         }
         else if (randomClass == 8)
         {
@@ -111,6 +137,11 @@ public class Word : MonoBehaviour
         }
 
         return randomWord;
+    }
+
+    public void CheckEqualWords()
+    {
+
     }
 
     public void UpdateWord()
