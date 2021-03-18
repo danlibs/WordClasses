@@ -17,6 +17,8 @@ public class GameDirector: MonoBehaviour
     private GameObject[] spawners;
     [SerializeField]
     private GameObject pauseMenu;
+    [SerializeField]
+    private CountdownIntro countdownIntro;
 
     public float timeRemaining = 30;
     private bool timerIsRunning;
@@ -30,27 +32,29 @@ public class GameDirector: MonoBehaviour
 
     private void Update()
     {
-        if (!gameIsOver)
+        if (countdownIntro.isGameStarted)
         {
-            EnableSpawners();
-            if (timerIsRunning)
+            if (!gameIsOver)
             {
-                if (timeRemaining >= 0)
+                EnableSpawners();
+                if (timerIsRunning)
                 {
-                    timeRemaining -= Time.deltaTime;
-                    timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
-                }
-                else
-                {
-                    timeRemaining = 0;
-                    timeText.text = timeRemaining.ToString();
-                    Debug.Log("Tempo esgotado!");
-                    timerIsRunning = false;
-                    GameOver();
+                    if (timeRemaining >= 0)
+                    {
+                        timeRemaining -= Time.deltaTime;
+                        timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
+                    }
+                    else
+                    {
+                        timeRemaining = 0;
+                        timeText.text = timeRemaining.ToString();
+                        Debug.Log("Tempo esgotado!");
+                        timerIsRunning = false;
+                        GameOver();
+                    }
                 }
             }
-
-        }    
+        }      
     }
 
     public void UpdatePoints()
@@ -107,15 +111,21 @@ public class GameDirector: MonoBehaviour
         gameOverBox.SetActive(false);
         pauseMenu.SetActive(false);
         DisableSpawners();
-        foreach (var word in boxesOnScene)
+        if (!gameIsOver)
         {
-            Destroy(word);
-        }
+            foreach (var word in boxesOnScene)
+            {
+                Destroy(word);
+            }
+        }    
         timeRemaining = 30;
+        timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
+        countdownIntro.isGameStarted = false;
+        StartCoroutine(countdownIntro.StartGame());
         timerIsRunning = true;
         points = 0;
         UpdatePoints();
-        //EnableSpawners();
+
     }
 
     public void PauseGame()
