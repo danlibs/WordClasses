@@ -48,7 +48,6 @@ public class GameDirector: MonoBehaviour
                     {
                         timeRemaining = 0;
                         timeText.text = timeRemaining.ToString();
-                        Debug.Log("Tempo esgotado!");
                         timerIsRunning = false;
                         GameOver();
                     }
@@ -107,7 +106,6 @@ public class GameDirector: MonoBehaviour
 
     public void RestartGame()
     {
-        gameIsOver = false;
         gameOverBox.SetActive(false);
         pauseMenu.SetActive(false);
         DisableSpawners();
@@ -117,7 +115,8 @@ public class GameDirector: MonoBehaviour
             {
                 Destroy(word);
             }
-        }    
+        }
+        gameIsOver = false;
         timeRemaining = 30;
         timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
         countdownIntro.isGameStarted = false;
@@ -148,4 +147,5 @@ public class GameDirector: MonoBehaviour
         }
         timerIsRunning = true;
     }
+
 }

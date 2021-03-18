@@ -10,6 +10,8 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
     [SerializeField]
     private GameDirector gameManager;
+    [SerializeField]
+    private PointsMultiplier pointsManager;
 
     private RectTransform rectTransform;
     private Word wordPlaced;
@@ -44,13 +46,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["noum"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -59,13 +63,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["adjective"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -74,13 +80,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["adverb"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -89,13 +97,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["article"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -104,13 +114,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["numeral"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -119,13 +131,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["pronoum"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -134,13 +148,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["preposition"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -149,13 +165,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["interjection"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
 
@@ -164,13 +182,15 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             {
                 if (wordPlaced.classes["verb"])
                 {
-                    gameManager.points += 2;
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
                     gameManager.timeRemaining += 1;
                     gameManager.UpdatePoints();
                 }
                 else
                 {
                     gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
                 }
             }
         }
