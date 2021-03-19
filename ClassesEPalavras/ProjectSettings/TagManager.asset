@@ -15,6 +15,7 @@ TagManager:
   - Verb
   - Word
   - Preposition
+  - Conjunction
   layers:
   - Default
   - TransparentFX

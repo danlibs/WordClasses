@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -156,6 +156,7 @@ MonoBehaviour:
   verbs: {fileID: 4900000, guid: e35b8539c8194b84aaa52e604bc831fd, type: 3}
   interjections: {fileID: 4900000, guid: b787a4dd928956947baf44bc73ca8da2, type: 3}
   prepositions: {fileID: 4900000, guid: 1c0b762ee3cfbdb40a351160f7ccabd3, type: 3}
+  conjunctions: {fileID: 4900000, guid: ed2248f20f9f22b41a57360750eb0f9f, type: 3}
 --- !u!1 &3029959253959592175
 GameObject:
   m_ObjectHideFlags: 0
@@ -249,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPositioned: 0
+  isDragging: 0
   canvas: {fileID: 0}
 --- !u!225 &3029959253959592171
 CanvasGroup:

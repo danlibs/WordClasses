@@ -19,6 +19,8 @@ public class GameDirector: MonoBehaviour
     private GameObject pauseMenu;
     [SerializeField]
     private CountdownIntro countdownIntro;
+    [SerializeField]
+    private PointsMultiplier pointsManager;
 
     public float timeRemaining = 30;
     private bool timerIsRunning;
@@ -117,6 +119,7 @@ public class GameDirector: MonoBehaviour
             }
         }
         gameIsOver = false;
+        pointsManager.correctAnswers = 0;
         timeRemaining = 30;
         timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
         countdownIntro.isGameStarted = false;

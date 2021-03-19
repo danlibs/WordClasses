@@ -193,6 +193,22 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
                     pointsManager.correctAnswers = 0;
                 }
             }
+
+            if (tag == "Conjunction")
+            {
+                if (wordPlaced.classes["conjunction"])
+                {
+                    gameManager.points += pointsManager.GainPoints();
+                    pointsManager.correctAnswers += 1;
+                    gameManager.timeRemaining += 1;
+                    gameManager.UpdatePoints();
+                }
+                else
+                {
+                    gameManager.timeRemaining -= 3;
+                    pointsManager.correctAnswers = 0;
+                }
+            }
         }
         
     }

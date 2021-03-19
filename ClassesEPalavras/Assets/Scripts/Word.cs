@@ -22,6 +22,7 @@ public class Word : MonoBehaviour
     private List<string> pronounsList;
     [SerializeField]
     private TextAsset numerals;
+    private List<string> numeralsList;
     [SerializeField]
     private TextAsset verbs;
     [SerializeField]
@@ -29,6 +30,8 @@ public class Word : MonoBehaviour
     [SerializeField]
     private TextAsset prepositions;
     private List<string> prepositionsList;
+    [SerializeField]
+    private TextAsset conjunctions;
 
     private string randomWord;
 
@@ -37,12 +40,13 @@ public class Word : MonoBehaviour
         articlesList = WordGetter.TextToList(articles);
         prepositionsList = WordGetter.TextToList(prepositions);
         pronounsList = WordGetter.TextToList(pronouns);
+        numeralsList = WordGetter.TextToList(numerals);
     }
 
     private void Start()
     {
         InitiateClasses();
-        randomClass = Random.Range(0, 8);
+        randomClass = Random.Range(0, 10);
         ClassSelect();
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
     }
@@ -78,6 +82,9 @@ public class Word : MonoBehaviour
             case 8:
                 classes["interjection"] = true;
                 break;
+            case 9:
+                classes["conjunction"] = true;
+                break;
         }
     }
 
@@ -106,6 +113,10 @@ public class Word : MonoBehaviour
             {
                 classes["pronoum"] = true;
             }
+            if (numeralsList.Contains(randomWord))
+            {
+                classes["numeral"] = true;
+            }
         }
         else if (randomClass == 4)
         {
@@ -122,6 +133,10 @@ public class Word : MonoBehaviour
         else if (randomClass == 5)
         {
             randomWord = WordGetter.TextToList(numerals)[Random.Range(0, WordGetter.TextToList(numerals).Count)];
+            if (articlesList.Contains(randomWord))
+            {
+                classes["article"] = true;
+            }
         }
         else if (randomClass == 6)
         {
@@ -143,6 +158,10 @@ public class Word : MonoBehaviour
         {
             randomWord = WordGetter.TextToList(interjections)[Random.Range(0, WordGetter.TextToList(interjections).Count)];
         }
+        else if (randomClass == 9)
+        {
+            randomWord = WordGetter.TextToList(conjunctions)[Random.Range(0, WordGetter.TextToList(conjunctions).Count)];
+        }
 
         return randomWord;
     }
@@ -150,7 +169,7 @@ public class Word : MonoBehaviour
     public void UpdateWord()
     {
         TurnAllValuesFalse();
-        randomClass = Random.Range(1, 9);
+        randomClass = Random.Range(0, 10);
         ClassSelect();
         GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
     }
@@ -167,7 +186,8 @@ public class Word : MonoBehaviour
             {"pronoum", false},
             {"verb", false},
             {"interjection", false},
-            {"preposition", false}
+            {"preposition", false},
+            {"conjunction", false}
         };
     }
 
