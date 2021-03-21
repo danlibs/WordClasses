@@ -14,9 +14,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     private RectTransform rectTransform;
     private CanvasGroup canvasGroup;
 
-    private Color mouseOverColor = Color.yellow;
-    private Color baseColor = Color.white;
-
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();

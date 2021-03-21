@@ -483,7 +483,7 @@ Transform:
   - {fileID: 678333214}
   - {fileID: 975019162}
   m_Father: {fileID: 2014928816}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &205008565
 GameObject:
@@ -4508,6 +4508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 0
+  pointsToSentences: 500
   pointsText: {fileID: 1889494709}
   timeText: {fileID: 357185214}
   gameOverBox: {fileID: 776740836}
@@ -5395,7 +5396,7 @@ RectTransform:
   - {fileID: 1084823849}
   - {fileID: 1233965747}
   m_Father: {fileID: 2014928816}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0.88375}
@@ -5536,8 +5537,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 94722744}
-  - {fileID: 138051396}
   - {fileID: 1892309367}
+  - {fileID: 138051396}
   - {fileID: 958093368}
   - {fileID: 776740837}
   - {fileID: 653076282}

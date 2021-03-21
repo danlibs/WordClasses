@@ -147,16 +147,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   randomClass: 0
+  isTimeWord: 0
   nouns: {fileID: 4900000, guid: e7b1dc7e83c83db4ba2fed55b4f23726, type: 3}
+  noumSentences: {fileID: 4900000, guid: 1bd3908940def204ca3ff09f8a8bcfcf, type: 3}
   adjectives: {fileID: 4900000, guid: ee9910d12e3e4b64ab5bd5ee160fe5b1, type: 3}
+  adjectiveSentences: {fileID: 4900000, guid: f029a9a4b0d3228438846137c58359e4, type: 3}
   adverbs: {fileID: 4900000, guid: f3a31b434c71c674cbdef56c7ec21dc0, type: 3}
+  adverbSentences: {fileID: 4900000, guid: 6069a24d58c9a5843a20ab89af5662f6, type: 3}
   articles: {fileID: 4900000, guid: 728a283ed905c164a9edfa720d868182, type: 3}
+  articleSentences: {fileID: 4900000, guid: 30508c821d661ac4ebcdd7ec2afdf97e, type: 3}
   pronouns: {fileID: 4900000, guid: 2e701867b97053c4f9d550399bdd1325, type: 3}
+  pronoumSentences: {fileID: 4900000, guid: ad445be25e392a44d93c86b13b05ed96, type: 3}
   numerals: {fileID: 4900000, guid: 70b69e26bc9630143ba7958bd3a8b1ad, type: 3}
+  numeralSentences: {fileID: 4900000, guid: 3e5e684af1ef5324f9eb48976350f73e, type: 3}
   verbs: {fileID: 4900000, guid: e35b8539c8194b84aaa52e604bc831fd, type: 3}
+  verbSentences: {fileID: 4900000, guid: ba06385034b991e44be331ec6569ab54, type: 3}
   interjections: {fileID: 4900000, guid: b787a4dd928956947baf44bc73ca8da2, type: 3}
+  interjectionSentences: {fileID: 4900000, guid: 23b12ebd26d97ea43b93ba1c39e1a78a,
+    type: 3}
   prepositions: {fileID: 4900000, guid: 1c0b762ee3cfbdb40a351160f7ccabd3, type: 3}
+  prepositionSentences: {fileID: 4900000, guid: ad48e014e110fc2489213e5d50068615,
+    type: 3}
   conjunctions: {fileID: 4900000, guid: ed2248f20f9f22b41a57360750eb0f9f, type: 3}
+  conjunctionSentences: {fileID: 4900000, guid: 6ab603b66f5a82e4993c175b63a1d26a,
+    type: 3}
 --- !u!1 &3029959253959592175
 GameObject:
   m_ObjectHideFlags: 0

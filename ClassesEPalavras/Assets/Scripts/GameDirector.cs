@@ -5,8 +5,17 @@ using TMPro;
 
 public class GameDirector: MonoBehaviour
 {
-    public int points;
+    public enum SpawnState
+    {
+        Word,
+        Sentence
+    }
 
+    public int points;
+    public static SpawnState spawnState;
+
+    [SerializeField]
+    private int pointsToSentences;
     [SerializeField]
     private TMP_Text pointsText;
     [SerializeField]
@@ -26,10 +35,12 @@ public class GameDirector: MonoBehaviour
     private bool timerIsRunning;
     private bool gameIsOver;
     private GameObject[] boxesOnScene;
+    private bool childDestroyed;
 
     private void Start()
     {
         timerIsRunning = true;
+        
     }
 
     private void Update()
@@ -38,11 +49,19 @@ public class GameDirector: MonoBehaviour
         {
             if (!gameIsOver)
             {
-                EnableSpawners();
                 if (timerIsRunning)
                 {
+                    EnableSpawners();
                     if (timeRemaining >= 0)
                     {
+                        if (points <= pointsToSentences)
+                        {
+                            spawnState = SpawnState.Word;
+                        }
+                        else
+                        {
+                            spawnState = SpawnState.Sentence;
+                        }
                         timeRemaining -= Time.deltaTime;
                         timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
                     }
@@ -65,24 +84,41 @@ public class GameDirector: MonoBehaviour
 
     private void EnableSpawners()
     {
-        if (points >= 0 && !spawners[0].GetComponent<WordSpawner>().isActive)
+        if (spawnState == SpawnState.Word)
+        {
+            if (points >= 0 && !spawners[0].GetComponent<WordSpawner>().isActive)
+            {
+                spawners[0].GetComponent<WordSpawner>().isActive = true;
+            }
+
+            if (points >= 10 && !spawners[1].GetComponent<WordSpawner>().isActive)
+            {
+                spawners[1].GetComponent<WordSpawner>().isActive = true;
+            }
+        
+            if (points >= 30 && !spawners[2].GetComponent<WordSpawner>().isActive)
+            {
+                spawners[2].GetComponent<WordSpawner>().isActive = true;
+            }
+
+            if (points >= 60 && !spawners[3].GetComponent<WordSpawner>().isActive)
+            {
+                spawners[3].GetComponent<WordSpawner>().isActive = true;
+            }
+        }
+        if (spawnState == SpawnState.Sentence)
         {
             spawners[0].GetComponent<WordSpawner>().isActive = true;
-        }
-
-        if (points >= 10 && !spawners[1].GetComponent<WordSpawner>().isActive)
-        {
             spawners[1].GetComponent<WordSpawner>().isActive = true;
-        }
-
-        if (points >= 30 && !spawners[2].GetComponent<WordSpawner>().isActive)
-        {
-            spawners[2].GetComponent<WordSpawner>().isActive = true;
-        }
-
-        if (points >= 60 && !spawners[3].GetComponent<WordSpawner>().isActive)
-        {
-            spawners[3].GetComponent<WordSpawner>().isActive = true;
+            if (!childDestroyed)
+            {
+                if (spawners[2].GetComponent<WordSpawner>().isActive && spawners[3].GetComponent<WordSpawner>().isActive)
+                {
+                    GameObject.Destroy(spawners[2].transform.GetChild(0).gameObject);
+                    GameObject.Destroy(spawners[3].transform.GetChild(0).gameObject);
+                    childDestroyed = true;
+                }
+            }
         }
     }
 
@@ -119,15 +155,16 @@ public class GameDirector: MonoBehaviour
             }
         }
         gameIsOver = false;
+        spawnState = SpawnState.Word;
         pointsManager.correctAnswers = 0;
         timeRemaining = 30;
         timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
         countdownIntro.isGameStarted = false;
+        childDestroyed = false;
         StartCoroutine(countdownIntro.StartGame());
         timerIsRunning = true;
         points = 0;
         UpdatePoints();
-
     }
 
     public void PauseGame()
