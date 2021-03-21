@@ -7,6 +7,7 @@ public class Word : MonoBehaviour
 {
     public Dictionary<string, bool> classes;
     public int randomClass;
+    public bool isTimeWord;
 
     [SerializeField]
     private TextAsset nouns;
@@ -34,6 +35,7 @@ public class Word : MonoBehaviour
     private TextAsset conjunctions;
 
     private string randomWord;
+    private TextMeshProUGUI wordText;
 
     private void Awake()
     {
@@ -41,6 +43,7 @@ public class Word : MonoBehaviour
         prepositionsList = WordGetter.TextToList(prepositions);
         pronounsList = WordGetter.TextToList(pronouns);
         numeralsList = WordGetter.TextToList(numerals);
+        wordText = GetComponent<TextMeshProUGUI>();
     }
 
     private void Start()
@@ -56,34 +59,34 @@ public class Word : MonoBehaviour
         switch (randomClass)
         {
             case 0:
-                classes["noum"] = true;
+                classes["Noum"] = true;
                 break;
             case 1:
-                classes["adjective"] = true;
+                classes["Adjective"] = true;
                 break;
             case 2:
-                classes["adverb"] = true;
+                classes["Adverb"] = true;
                 break;
             case 3:
-                classes["article"] = true;
+                classes["Article"] = true;
                 break;
             case 4:
-                classes["pronoum"] = true;
+                classes["Pronoum"] = true;
                 break;
             case 5:
-                classes["numeral"] = true;
+                classes["Numeral"] = true;
                 break;
             case 6:
-                classes["verb"] = true;
+                classes["Verb"] = true;
                 break;
             case 7:
-                classes["preposition"] = true;
+                classes["Preposition"] = true;
                 break;
             case 8:
-                classes["interjection"] = true;
+                classes["Interjection"] = true;
                 break;
             case 9:
-                classes["conjunction"] = true;
+                classes["Conjunction"] = true;
                 break;
         }
     }
@@ -107,15 +110,15 @@ public class Word : MonoBehaviour
             randomWord = WordGetter.TextToList(articles)[Random.Range(0, WordGetter.TextToList(articles).Count)];
             if (prepositionsList.Contains(randomWord))
             {
-                classes["preposition"] = true;
+                classes["Preposition"] = true;
             }
             if (pronounsList.Contains(randomWord))
             {
-                classes["pronoum"] = true;
+                classes["Pronoum"] = true;
             }
             if (numeralsList.Contains(randomWord))
             {
-                classes["numeral"] = true;
+                classes["Numeral"] = true;
             }
         }
         else if (randomClass == 4)
@@ -123,11 +126,11 @@ public class Word : MonoBehaviour
             randomWord = WordGetter.TextToList(pronouns)[Random.Range(0, WordGetter.TextToList(pronouns).Count)];
             if (articlesList.Contains(randomWord))
             {
-                classes["article"] = true;
+                classes["Article"] = true;
             }
             if (prepositionsList.Contains(randomWord))
             {
-                classes["preposition"] = true;
+                classes["Preposition"] = true;
             }
         }
         else if (randomClass == 5)
@@ -135,7 +138,7 @@ public class Word : MonoBehaviour
             randomWord = WordGetter.TextToList(numerals)[Random.Range(0, WordGetter.TextToList(numerals).Count)];
             if (articlesList.Contains(randomWord))
             {
-                classes["article"] = true;
+                classes["Article"] = true;
             }
         }
         else if (randomClass == 6)
@@ -147,11 +150,11 @@ public class Word : MonoBehaviour
             randomWord = WordGetter.TextToList(prepositions)[Random.Range(0, WordGetter.TextToList(prepositions).Count)];
             if (articlesList.Contains(randomWord))
             {
-                classes["article"] = true;
+                classes["Article"] = true;
             }
             if (pronounsList.Contains(randomWord))
             {
-                classes["pronoum"] = true;
+                classes["Pronoum"] = true;
             }
         }
         else if (randomClass == 8)
@@ -169,9 +172,30 @@ public class Word : MonoBehaviour
     public void UpdateWord()
     {
         TurnAllValuesFalse();
+        /*foreach (var item in classes)
+        {
+            Debug.Log("Classe: "+ item.Key.ToString() + "\n Valor: "+ item.Value.ToString());
+        }*/
         randomClass = Random.Range(0, 10);
         ClassSelect();
-        GetComponent<TextMeshProUGUI>().text = WordSelect(randomClass);
+        CreateNormalWordOrTimeWord();
+    }
+
+    private void CreateNormalWordOrTimeWord()
+    {
+        int numberToTimeWord = Random.Range(1, 101);
+        if (numberToTimeWord <= 5)
+        {
+            wordText.color = Color.blue; 
+            wordText.text = WordSelect(randomClass);
+            isTimeWord = true;
+        }
+        else
+        {
+            wordText.color = Color.white;
+            wordText.text = WordSelect(randomClass);
+            isTimeWord = false;
+        }
     }
 
     private void InitiateClasses()
@@ -200,6 +224,7 @@ public class Word : MonoBehaviour
         {
             classes[classKeys[i]] = false;
         }
+        
         return classes;
     }
 

@@ -8,8 +8,6 @@ public class PointsMultiplier : MonoBehaviour
     public int correctAnswers;
 
     [SerializeField]
-    private GameDirector gameDirector;
-    [SerializeField]
     private TMP_Text pointsMultiplierText;
 
     private int pointsGained;

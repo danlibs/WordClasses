@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using TMPro;
+using System.Linq;
 
 public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, IPointerExitHandler
 {
@@ -12,6 +14,8 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
     private GameDirector gameManager;
     [SerializeField]
     private PointsMultiplier pointsManager;
+    [SerializeField]
+    private GameObject pointsAndTimeGainedText;
 
     private RectTransform rectTransform;
     private Word wordPlaced;
@@ -23,6 +27,11 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
         rectTransform = GetComponent<RectTransform>();
     }
 
+    private void Start()
+    {
+        pointsAndTimeGainedText = GameObject.FindGameObjectWithTag("TextPointsAndTime");
+    }
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null)
@@ -30,8 +39,10 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = rectTransform.anchoredPosition;
             wordPlaced = eventData.pointerDrag.GetComponentInChildren<Word>();
             draggedObject = wordPlaced.GetComponentInParent<DragDrop>();
+            pointsAndTimeGainedText.GetComponent<RectTransform>().localPosition = rectTransform.localPosition;
 
             CheckWordAndClass();
+            StartTextForPointsAndTimeGained();
             wordPlaced.GetComponentInParent<DragDrop>().isPositioned = true;
             GetComponent<Image>().color = baseColor;
         }
@@ -41,176 +52,33 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
     {
         if (wordPlaced != null)
         {
-            //Verify nouns
-            if (tag == "Noum")
+            TextMeshProUGUI timeAndPoints = pointsAndTimeGainedText.GetComponent<TextMeshProUGUI>();
+            
+            var keyNames = wordPlaced.classes.Where(s => s.Value == true).Select(s => s.Key).ToList();
+            if (keyNames.Contains(tag))
             {
-                if (wordPlaced.classes["noum"])
+                gameManager.points += pointsManager.GainPoints();
+                pointsManager.correctAnswers += 1;
+                timeAndPoints.color = Color.blue;
+                if (wordPlaced.isTimeWord) gameManager.timeRemaining += 10; else gameManager.timeRemaining += 1;
+                if (wordPlaced.isTimeWord)
                 {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
+                    timeAndPoints.text = "+" + pointsManager.GainPoints() + " pts \n +10 seg";
                 }
                 else
                 {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
+                    timeAndPoints.text = "+" + pointsManager.GainPoints() + " pts \n +1 seg";
                 }
+                gameManager.UpdatePoints();
             }
-
-            //Verify adjectives
-            if (tag == "Adjective")
+            else
             {
-                if (wordPlaced.classes["adjective"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify adverbs
-            if (tag == "Adverb")
-            {
-                if (wordPlaced.classes["adverb"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify articles
-            if (tag == "Article")
-            {
-                if (wordPlaced.classes["article"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify numerals
-            if (tag == "Numeral")
-            {
-                if (wordPlaced.classes["numeral"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify pronouns
-            if (tag == "Pronoum")
-            {
-                if (wordPlaced.classes["pronoum"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify preposition
-            if (tag == "Preposition")
-            {
-                if (wordPlaced.classes["preposition"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify interjections
-            if (tag == "Interjection")
-            {
-                if (wordPlaced.classes["interjection"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            //Verify verbs
-            if (tag == "Verb")
-            {
-                if (wordPlaced.classes["verb"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
-            }
-
-            if (tag == "Conjunction")
-            {
-                if (wordPlaced.classes["conjunction"])
-                {
-                    gameManager.points += pointsManager.GainPoints();
-                    pointsManager.correctAnswers += 1;
-                    gameManager.timeRemaining += 1;
-                    gameManager.UpdatePoints();
-                }
-                else
-                {
-                    gameManager.timeRemaining -= 3;
-                    pointsManager.correctAnswers = 0;
-                }
+                gameManager.timeRemaining -= 3;
+                pointsManager.correctAnswers = 0;
+                timeAndPoints.color = Color.red;
+                timeAndPoints.text = "-3 seg";
             }
         }
-        
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -227,5 +95,11 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
     public void OnPointerExit(PointerEventData eventData)
     {
         GetComponent<Image>().color = baseColor;               
+    }
+
+    private void StartTextForPointsAndTimeGained()
+    {
+        pointsAndTimeGainedText.GetComponent<TextMeshProUGUI>().alpha = 255;
+        pointsAndTimeGainedText.GetComponent<Animation>().Play();
     }
 }

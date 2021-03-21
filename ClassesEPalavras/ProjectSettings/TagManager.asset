@@ -16,6 +16,7 @@ TagManager:
   - Word
   - Preposition
   - Conjunction
+  - TextPointsAndTime
   layers:
   - Default
   - TransparentFX
