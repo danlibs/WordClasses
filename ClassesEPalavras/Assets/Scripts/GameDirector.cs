@@ -139,6 +139,11 @@ public class GameDirector: MonoBehaviour
             Destroy(word);
         }
         DisableSpawners();
+        if (points > GameManager.highScore)
+        {
+            GameManager.highScore = points;
+            GameManager.Instance.SaveHighScore();
+        }
         gameOverBox.SetActive(true);
     }
 
