@@ -8,6 +8,7 @@ public class Configurations : MonoBehaviour
     public InputField inputField;
     public Toggle music;
     public Toggle sounds;
+    private AudioManager audioManager;
 
     private void Awake()
     {
@@ -16,6 +17,11 @@ public class Configurations : MonoBehaviour
         GameObject soundsToggle = transform.Find("EnableSoundsText").gameObject;
         music = musicToggle.GetComponentInChildren<Toggle>();
         sounds = soundsToggle.GetComponentInChildren<Toggle>();
+    }
+
+    private void Start()
+    {
+        
     }
 
     private void OnEnable()
@@ -42,13 +48,33 @@ public class Configurations : MonoBehaviour
 
     public void EnableMusic(bool value)
     {
+        audioManager = FindObjectOfType<AudioManager>();
         GameManager.isMusicEnabled = value;
+        if (!value)
+        {
+            audioManager.PlaySound("ActivateToggle");
+        }
+        else
+        {
+            audioManager.PlaySound("DeactivateToggle");
+        }
+
         PlayerPrefs.SetInt("enableMusic", value ? 1 : 0);
     }
 
     public void EnableSounds(bool value)
     {
+        audioManager = FindObjectOfType<AudioManager>();
         GameManager.areSoundsEnabled = value;
+        if (!value)
+        {
+            audioManager.PlaySound("ActivateToggle");
+        }
+        else
+        {
+            audioManager.PlaySound("DeactivateToggle");        
+        }
+
         PlayerPrefs.SetInt("enableSounds", value ? 1 : 0);
     }
 

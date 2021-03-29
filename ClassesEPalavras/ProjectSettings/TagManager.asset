@@ -17,6 +17,8 @@ TagManager:
   - Preposition
   - Conjunction
   - TextPointsAndTime
+  - OpenButton
+  - CloseButton
   layers:
   - Default
   - TransparentFX

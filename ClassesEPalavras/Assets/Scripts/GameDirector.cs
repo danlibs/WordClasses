@@ -27,10 +27,12 @@ public class GameDirector: MonoBehaviour
     private bool gameIsOver;
     private GameObject[] boxesOnScene;
     private bool childDestroyed;
+    private AudioManager audioManager;
 
     private void Start()
     {
         timerIsRunning = true;
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void Update()
@@ -156,6 +158,7 @@ public class GameDirector: MonoBehaviour
 
     public void PauseGame()
     {
+        audioManager.PauseMusic("GameMusic");
         timerIsRunning = false;
         boxesOnScene = GameObject.FindGameObjectsWithTag("Word");
         foreach (var word in boxesOnScene)
@@ -168,6 +171,7 @@ public class GameDirector: MonoBehaviour
     public void ContinueGame()
     {
         pauseMenu.SetActive(false);
+        audioManager.UnPauseMusic("GameMusic");
         foreach (var word in boxesOnScene)
         {
             word.SetActive(true);

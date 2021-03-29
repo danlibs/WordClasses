@@ -21,6 +21,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
     private Word wordPlaced;
     private Color mouseOverColor = Color.yellow;
     private Color baseColor = Color.white;
+    private AudioManager audioManager;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
 
     private void Start()
     {
+        audioManager = FindObjectOfType<AudioManager>();
         pointsAndTimeGainedText = GameObject.FindGameObjectWithTag("TextPointsAndTime");
     }
 
@@ -57,6 +59,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             var keyNames = wordPlaced.classes.Where(s => s.Value == true).Select(s => s.Key).ToList();
             if (keyNames.Contains(tag))
             {
+                audioManager.PlaySound("CorrectAnswer");
                 GameDirector.points += pointsManager.GainPoints();
                 pointsManager.correctAnswers += 1;
                 timeAndPoints.color = Color.blue;
@@ -73,6 +76,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             }
             else
             {
+                audioManager.PlaySound("WrongAnswer");
                 gameManager.timeRemaining -= 3;
                 pointsManager.correctAnswers = 0;
                 timeAndPoints.color = Color.red;
