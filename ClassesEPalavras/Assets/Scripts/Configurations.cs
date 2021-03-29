@@ -20,12 +20,11 @@ public class Configurations : MonoBehaviour
 
     private void OnEnable()
     {
-        if (SaveSystem.ConfigsPathHasFile())
+        if (PlayerPrefs.HasKey("pointsToSentences"))
         {
-            GameManager.LoadConfigurations();
             TextOnInput();
-            sounds.isOn = GameManager.areSoundsEnabled;
-            music.isOn = GameManager.isMusicEnabled;
+            sounds.isOn = (PlayerPrefs.GetInt("enableSounds") != 0);
+            music.isOn = (PlayerPrefs.GetInt("enableMusic") != 0);
         }
         else
         {
@@ -44,15 +43,17 @@ public class Configurations : MonoBehaviour
     public void EnableMusic(bool value)
     {
         GameManager.isMusicEnabled = value;
+        PlayerPrefs.SetInt("enableMusic", value ? 1 : 0);
     }
 
     public void EnableSounds(bool value)
     {
         GameManager.areSoundsEnabled = value;
+        PlayerPrefs.SetInt("enableSounds", value ? 1 : 0);
     }
 
     public void TextOnInput()
     {
-        inputField.GetComponentInChildren<Text>().text = GameManager.pointsToSentences.ToString();
+        inputField.GetComponentInChildren<Text>().text = PlayerPrefs.GetInt("pointsToSentences").ToString();
     }
 }

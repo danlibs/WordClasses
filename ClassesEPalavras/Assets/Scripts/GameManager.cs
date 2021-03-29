@@ -33,7 +33,6 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         //---ACTIVATE BEFORE BUILD---
-        //SaveSystem.DeleteConfigsFile();
         //SaveSystem.DeleteSaveFile();
         //------------------------------//
 
@@ -50,13 +49,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        if (!SaveSystem.ConfigsPathHasFile())
+        if (!PlayerPrefs.HasKey("pointsToSentences"))
         {
             pointsToSentences = 500;
         }
         else
         {
-            LoadConfigurations();
+            pointsToSentences = PlayerPrefs.GetInt("pointsToSentences");
         }
     }
 
@@ -96,14 +95,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SaveConfigurations() => SaveSystem.SaveConfigurations(this);
-
-    public static void LoadConfigurations()
-    {
-        ConfigurationsData data = SaveSystem.LoadConfigurations();
-        pointsToSentences = data.pointsToSentences;
-        isMusicEnabled = data.enableMusic;
-        areSoundsEnabled = data.enableSounds;
-    }
+    public void SavePlayerprefs() => PlayerPrefs.Save();
 
 }

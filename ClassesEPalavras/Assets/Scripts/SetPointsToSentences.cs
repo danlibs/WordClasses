@@ -15,6 +15,8 @@ public class SetPointsToSentences : MonoBehaviour
     public void InputToPoints()
     {
         GameManager.pointsToSentences = int.Parse(input.text);
+        PlayerPrefs.SetInt("pointsToSentences", GameManager.pointsToSentences);
+        //PlayerPrefs.Save();
     }
 
 }

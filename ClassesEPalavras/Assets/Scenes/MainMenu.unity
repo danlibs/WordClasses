@@ -768,7 +768,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 691128534}
-        m_MethodName: SaveConfigurations
+        m_MethodName: SavePlayerprefs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4445,8 +4445,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.9000244, y: -209.39203}
-  m_SizeDelta: {x: -49.62628, y: 627.60406}
+  m_AnchoredPosition: {x: -1.9000244, y: -315.5627}
+  m_SizeDelta: {x: -49.62628, y: 631.1241}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193594984
 MonoBehaviour:
@@ -4540,7 +4540,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -4.138503, y: -2.2936928, z: 3.282006, w: -8.427553}
+  m_margin: {x: -4.138503, y: 3.5202127, z: 3.282006, w: -8.427553}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

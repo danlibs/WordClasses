@@ -21,6 +21,6 @@ public class ApplyConfigurationsButton : MonoBehaviour
 
     private void SaveChanges()
     {
-        gameManager.SaveConfigurations();
+        PlayerPrefs.Save();
     }
 }
