@@ -57,7 +57,7 @@ public class WordClassBox : MonoBehaviour, IDropHandler, IPointerEnterHandler, I
             var keyNames = wordPlaced.classes.Where(s => s.Value == true).Select(s => s.Key).ToList();
             if (keyNames.Contains(tag))
             {
-                gameManager.points += pointsManager.GainPoints();
+                GameDirector.points += pointsManager.GainPoints();
                 pointsManager.correctAnswers += 1;
                 timeAndPoints.color = Color.blue;
                 if (wordPlaced.isTimeWord) gameManager.timeRemaining += 10; else gameManager.timeRemaining += 1;

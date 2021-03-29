@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public enum SpawnState
+    {
+        Word,
+        Sentence
+    }
+    public static SpawnState spawnState;
+
     private static GameManager instance;
     public static GameManager Instance
     {
@@ -18,9 +25,18 @@ public class GameManager : MonoBehaviour
         }
     }
     public static int highScore;
+    public static int pointsToSentences;
+    public static bool isMusicEnabled = true;
+    public static bool areSoundsEnabled = true;
+
 
     private void Awake()
     {
+        //---ACTIVATE BEFORE BUILD---
+        //SaveSystem.DeleteConfigsFile();
+        //SaveSystem.DeleteSaveFile();
+        //------------------------------//
+
         DontDestroyOnLoad(this.gameObject);
         if (instance != null && instance != this)
         {
@@ -32,8 +48,34 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        if (!SaveSystem.ConfigsPathHasFile())
+        {
+            pointsToSentences = 500;
+        }
+        else
+        {
+            LoadConfigurations();
+        }
+    }
+
+    private void Update()
+    {
+        if (GameDirector.points <= pointsToSentences)
+        {
+            spawnState = SpawnState.Word;
+        }
+        else
+        {
+            spawnState = SpawnState.Sentence;
+        }
+    }
+
     public void ChangeScene(int sceneIndex)
     {
+        GameDirector.points = 0;
+        spawnState = SpawnState.Word;
         SceneManager.LoadScene(sceneIndex);
     }
 
@@ -41,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public string LoadHighScore()
     {
-        if (SaveSystem.PathHasFile())
+        if (SaveSystem.SavePathHasFile())
         {
             PlayerData data = SaveSystem.LoadPlayer();
             highScore = data.highScore;
@@ -52,6 +94,16 @@ public class GameManager : MonoBehaviour
         {
             return "0";
         }
+    }
+
+    public void SaveConfigurations() => SaveSystem.SaveConfigurations(this);
+
+    public static void LoadConfigurations()
+    {
+        ConfigurationsData data = SaveSystem.LoadConfigurations();
+        pointsToSentences = data.pointsToSentences;
+        isMusicEnabled = data.enableMusic;
+        areSoundsEnabled = data.enableSounds;
     }
 
 }

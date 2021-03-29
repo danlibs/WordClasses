@@ -5,17 +5,8 @@ using TMPro;
 
 public class GameDirector: MonoBehaviour
 {
-    public enum SpawnState
-    {
-        Word,
-        Sentence
-    }
+    public static int points;
 
-    public int points;
-    public static SpawnState spawnState;
-
-    [SerializeField]
-    private int pointsToSentences;
     [SerializeField]
     private TMP_Text pointsText;
     [SerializeField]
@@ -40,7 +31,6 @@ public class GameDirector: MonoBehaviour
     private void Start()
     {
         timerIsRunning = true;
-        
     }
 
     private void Update()
@@ -54,14 +44,6 @@ public class GameDirector: MonoBehaviour
                     EnableSpawners();
                     if (timeRemaining >= 0)
                     {
-                        if (points <= pointsToSentences)
-                        {
-                            spawnState = SpawnState.Word;
-                        }
-                        else
-                        {
-                            spawnState = SpawnState.Sentence;
-                        }
                         timeRemaining -= Time.deltaTime;
                         timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
                     }
@@ -84,7 +66,7 @@ public class GameDirector: MonoBehaviour
 
     private void EnableSpawners()
     {
-        if (spawnState == SpawnState.Word)
+        if (GameManager.spawnState == GameManager.SpawnState.Word)
         {
             if (points >= 0 && !spawners[0].GetComponent<WordSpawner>().isActive)
             {
@@ -106,7 +88,7 @@ public class GameDirector: MonoBehaviour
                 spawners[3].GetComponent<WordSpawner>().isActive = true;
             }
         }
-        if (spawnState == SpawnState.Sentence)
+        if (GameManager.spawnState == GameManager.SpawnState.Sentence)
         {
             spawners[0].GetComponent<WordSpawner>().isActive = true;
             spawners[1].GetComponent<WordSpawner>().isActive = true;
@@ -160,7 +142,7 @@ public class GameDirector: MonoBehaviour
             }
         }
         gameIsOver = false;
-        spawnState = SpawnState.Word;
+        GameManager.spawnState = GameManager.SpawnState.Word;
         pointsManager.correctAnswers = 0;
         timeRemaining = 30;
         timeText.text = Mathf.FloorToInt(timeRemaining % 60).ToString();
