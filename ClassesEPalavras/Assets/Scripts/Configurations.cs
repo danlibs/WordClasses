@@ -19,11 +19,6 @@ public class Configurations : MonoBehaviour
         sounds = soundsToggle.GetComponentInChildren<Toggle>();
     }
 
-    private void Start()
-    {
-        
-    }
-
     private void OnEnable()
     {
         if (PlayerPrefs.HasKey("pointsToSentences"))

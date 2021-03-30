@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameDirector: MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class GameDirector: MonoBehaviour
     private CountdownIntro countdownIntro;
     [SerializeField]
     private PointsMultiplier pointsManager;
+    [SerializeField]
+    private Button pauseButton;
 
     public float timeRemaining = 30;
     private bool timerIsRunning;
@@ -128,6 +131,7 @@ public class GameDirector: MonoBehaviour
             GameManager.highScore = points;
             GameManager.Instance.SaveHighScore();
         }
+        pauseButton.enabled = false;
         gameOverBox.SetActive(true);
     }
 
@@ -153,6 +157,7 @@ public class GameDirector: MonoBehaviour
         StartCoroutine(countdownIntro.StartGame());
         timerIsRunning = true;
         points = 0;
+        audioManager.PlayMusic("GameMusic");
         UpdatePoints();
     }
 

@@ -23,6 +23,11 @@ public class MusicChooser : MonoBehaviour
             audioManager.StopMusic("MainMenuMusic");
             audioManager.PlayMusic("GameMusic");
         }
+
+        if (PlayerPrefs.GetInt("enableMusic") == 1)
+        {
+            isGameMusicPlaying = true;
+        }
     }
 
     private void Update()

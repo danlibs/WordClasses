@@ -52,6 +52,9 @@ public class GameManager : MonoBehaviour
         if (!PlayerPrefs.HasKey("pointsToSentences"))
         {
             pointsToSentences = 500;
+            PlayerPrefs.SetInt("pointsToSentences", 500);
+            PlayerPrefs.SetInt("enableMusic", 1);
+            PlayerPrefs.SetInt("enableSounds", 1);
         }
         else
         {
